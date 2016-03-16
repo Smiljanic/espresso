@@ -117,6 +117,25 @@ class Non_bonded_interactionsTests(ut.TestCase):
              "e1": 72, "e2": 82, "b1": 9.2, "b2": 10.2},
             "generic_lennard_jones")
 
+
+    if "GAY_BERNE" in espressomd.features():
+        test_gb1 = generateTestForNon_bonded_interaction(
+            0, 0, GayBerneInteraction,
+            {"epsilon": 1., "sigma": 2., "cutoff": 3., "k1": 4., "k2": 5.,
+             "mu": 7, "nu": 8.},
+            "gay_berne")
+
+        test_gb2 = generateTestForNon_bonded_interaction(
+            0, 0, GayBerneInteraction,
+            {"epsilon": 10., "sigma": 3., "cutoff": 5., "k1": .5, "k2": .5,
+             "mu": .7, "nu": .8},
+            "gay_berne")
+
+        test_gb3 = generateTestForNon_bonded_interaction(
+            0, 0, GayBerneInteraction,
+            {"epsilon": 1., "sigma": 2., "cutoff": 3., "k1": 4., "k2": 5.,
+             "mu": 7, "nu": 8.},
+            "gay_berne")
     def test_forcecap(self):
         self.es.non_bonded_inter.set_force_cap(17.5)
         self.assertEqual(self.es.non_bonded_inter.get_force_cap(), 17.5)

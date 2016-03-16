@@ -46,6 +46,16 @@ cdef extern from "interaction_data.hpp":
         double LJGEN_lambda
         double LJGEN_softrad
 
+        double GB_eps
+        double GB_sig
+        double GB_cut
+        double GB_k1
+        double GB_k2
+        double GB_mu
+        double GB_nu
+        double GB_chi1
+        double GB_chi2
+
     cdef ia_parameters * get_ia_param(int i, int j)
 
 cdef extern from "lj.hpp":
@@ -72,6 +82,26 @@ cdef extern from "ljgen.hpp":
                                   double shift, double offset,
                                   int a1, int a2, double b1, double b2,
                                   double cap_radius)
+
+
+#cdef extern from "gb.hpp":
+#    cdef int gay_berne_set_params(int part_type_a, int part_type_b,
+#                                  double eps, double sig, double cut, 
+#                                  double k1, double k2, 
+#                                  double mu, double nu, double chi1, double chi2)  
+
+cdef extern from "gb.hpp":
+  # IF GAY_BERNE_TRIAXIAL:
+  #     cdef int gb_set_params(int part_type_a, int part_type_b,
+  #                            double eps1, double eps2, double eps3,
+  #                            double sig1, double sig2, double sig3,
+  #                            double cut, double mu, double nu,
+  #                            double chi1, double chi2)                              
+  # ELSE:
+        cdef int gay_berne_set_params(int part_type_a, int part_type_b,
+                               double eps, double sig, double cut, 
+                               double k1, double k2, 
+                               double mu, double nu)  
 
 cdef extern from "interaction_data.hpp":
     ctypedef struct Fene_bond_parameters:
